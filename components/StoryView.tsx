@@ -1,12 +1,15 @@
-import React from 'react';
+
+import React, { useMemo } from 'react';
 import { Scroll, Mic2, ArrowRight, ArrowLeft } from 'lucide-react';
 import { STORY_DATA, StorySection, StoryTable } from '../data/story';
 import { STORY_DATA_PART_2 } from '../data/story1';
 import { STORY_DATA_PART_3 } from '../data/story2';
 import { STORY_DATA_PART_4 } from '../data/story3';
+import { STORY_DATA_PART_5 } from '../data/story4';
+import PlayoffBracket from './PlayoffBracket';
 
 // Merge all story chapters
-const FULL_STORY_DATA = [...STORY_DATA, ...STORY_DATA_PART_2, ...STORY_DATA_PART_3, ...STORY_DATA_PART_4];
+const RAW_STORY_DATA = [...STORY_DATA, ...STORY_DATA_PART_2, ...STORY_DATA_PART_3, ...STORY_DATA_PART_4, ...STORY_DATA_PART_5];
 
 interface StoryViewProps {
   activeChapterId: number;
@@ -41,21 +44,36 @@ const StoryTableView: React.FC<{ table: StoryTable }> = ({ table }) => {
 };
 
 const StoryView: React.FC<StoryViewProps> = ({ activeChapterId, onChapterChange }) => {
-  const activeChapter = FULL_STORY_DATA.find(c => c.id === activeChapterId) || FULL_STORY_DATA[0];
+  // Ensure chapters are sorted by ID to guarantee correct flow
+  const sortedChapters = useMemo(() => {
+    return [...RAW_STORY_DATA].sort((a, b) => a.id - b.id);
+  }, []);
+
+  // Find the index of the current chapter
+  const currentIndex = sortedChapters.findIndex(c => c.id === activeChapterId);
+  
+  // Fallback to first chapter if ID not found, or if currentIndex is -1
+  const activeChapter = currentIndex !== -1 ? sortedChapters[currentIndex] : sortedChapters[0];
+  const safeCurrentIndex = currentIndex !== -1 ? currentIndex : 0;
 
   const handleNext = () => {
-    if (activeChapterId < FULL_STORY_DATA.length) {
-        onChapterChange(activeChapterId + 1);
+    if (safeCurrentIndex < sortedChapters.length - 1) {
+        const nextChapterId = sortedChapters[safeCurrentIndex + 1].id;
+        onChapterChange(nextChapterId);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handlePrev = () => {
-    if (activeChapterId > 1) {
-        onChapterChange(activeChapterId - 1);
+    if (safeCurrentIndex > 0) {
+        const prevChapterId = sortedChapters[safeCurrentIndex - 1].id;
+        onChapterChange(prevChapterId);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const isFirstChapter = safeCurrentIndex === 0;
+  const isLastChapter = safeCurrentIndex === sortedChapters.length - 1;
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 pb-20 animate-in fade-in duration-500">
@@ -72,8 +90,8 @@ const StoryView: React.FC<StoryViewProps> = ({ activeChapterId, onChapterChange 
         <div className="flex items-center justify-center gap-6 mt-6">
             <button 
                 onClick={handlePrev}
-                disabled={activeChapterId === 1}
-                className={`p-3 rounded-full border transition-all ${activeChapterId === 1 ? 'border-slate-800 text-slate-800 opacity-50 cursor-not-allowed' : 'border-slate-700 text-slate-400 hover:border-yellow-500 hover:text-yellow-500'}`}
+                disabled={isFirstChapter}
+                className={`p-3 rounded-full border transition-all ${isFirstChapter ? 'border-slate-800 text-slate-800 opacity-50 cursor-not-allowed' : 'border-slate-700 text-slate-400 hover:border-yellow-500 hover:text-yellow-500'}`}
             >
                 <ArrowLeft className="w-5 h-5" />
             </button>
@@ -81,11 +99,14 @@ const StoryView: React.FC<StoryViewProps> = ({ activeChapterId, onChapterChange 
                 <p className="text-xl text-yellow-500 font-serif italic">
                     {activeChapter.title}
                 </p>
+                <p className="text-xs text-slate-500 mt-1 uppercase tracking-widest">
+                    Page {safeCurrentIndex + 1} of {sortedChapters.length}
+                </p>
             </div>
             <button 
                 onClick={handleNext}
-                disabled={activeChapterId === FULL_STORY_DATA.length}
-                className={`p-3 rounded-full border transition-all ${activeChapterId === FULL_STORY_DATA.length ? 'border-slate-800 text-slate-800 opacity-50 cursor-not-allowed' : 'border-slate-700 text-slate-400 hover:border-yellow-500 hover:text-yellow-500'}`}
+                disabled={isLastChapter}
+                className={`p-3 rounded-full border transition-all ${isLastChapter ? 'border-slate-800 text-slate-800 opacity-50 cursor-not-allowed' : 'border-slate-700 text-slate-400 hover:border-yellow-500 hover:text-yellow-500'}`}
             >
                 <ArrowRight className="w-5 h-5" />
             </button>
@@ -155,7 +176,11 @@ const StoryView: React.FC<StoryViewProps> = ({ activeChapterId, onChapterChange 
                         {section.dialogues.map((dlg, dIdx) => (
                             <div key={dIdx} className="group">
                                 <span className={`${dlg.colorClass} font-bold uppercase text-sm block mb-1`}>{dlg.speaker}</span>
-                                {dlg.table ? (
+                                {dlg.customType === 'bracket' ? (
+                                    <div className="my-6">
+                                        <PlayoffBracket />
+                                    </div>
+                                ) : dlg.table ? (
                                     <StoryTableView table={dlg.table} />
                                 ) : (
                                     <p className="text-white whitespace-pre-line">
@@ -169,7 +194,6 @@ const StoryView: React.FC<StoryViewProps> = ({ activeChapterId, onChapterChange 
                 </div>
             ))}
 
-            {/* FIX: The end of this file was corrupted. Reconstructing the 'outro' section and the component's closing tags. */}
             {/* Outro */}
             {activeChapter.outro && (
                 <div className="pt-12 border-t border-white/10 space-y-6">

@@ -3,6 +3,7 @@ import { TeamData, MatchResult, MatchContext, MatchEvent } from '../types';
 import { simulateMatch, generateMatchContext } from '../services/matchService';
 import { Trophy, Shield, MapPin, Clock, CloudRain, Play, FastForward, RotateCcw, Award } from 'lucide-react';
 import PitchVisualizer from './PitchVisualizer';
+import TeamLogo from './TeamLogo';
 
 interface MatchViewProps {
   teams: TeamData[];
@@ -113,8 +114,12 @@ const MatchView: React.FC<MatchViewProps> = ({ teams }) => {
                       </select>
                       {homeTeam && (
                           <div className="animate-in zoom-in duration-300">
-                               <div className="w-20 h-20 rounded-full mx-auto mb-2 border-4 shadow-lg flex items-center justify-center text-2xl font-bold bg-slate-900" style={{ borderColor: homeTeam.primaryColor, color: homeTeam.primaryColor }}>
-                                   {homeTeam.nameEN.charAt(0)}
+                               <div className="w-20 h-20 rounded-full mx-auto mb-2 bg-slate-900 flex items-center justify-center p-2 shadow-lg">
+                                   <TeamLogo 
+                                      teamName={homeTeam.nameEN} 
+                                      primaryColor={homeTeam.primaryColor} 
+                                      secondaryColor={homeTeam.secondaryColor} 
+                                   />
                                </div>
                                <div className="font-bold text-lg">{homeTeam.nameEN}</div>
                                <div className="text-xs text-slate-400">{homeTeam.stadium}</div>
@@ -144,8 +149,12 @@ const MatchView: React.FC<MatchViewProps> = ({ teams }) => {
                       </select>
                       {awayTeam && (
                           <div className="animate-in zoom-in duration-300">
-                               <div className="w-20 h-20 rounded-full mx-auto mb-2 border-4 shadow-lg flex items-center justify-center text-2xl font-bold bg-slate-900" style={{ borderColor: awayTeam.primaryColor, color: awayTeam.primaryColor }}>
-                                   {awayTeam.nameEN.charAt(0)}
+                               <div className="w-20 h-20 rounded-full mx-auto mb-2 bg-slate-900 flex items-center justify-center p-2 shadow-lg">
+                                   <TeamLogo 
+                                      teamName={awayTeam.nameEN} 
+                                      primaryColor={awayTeam.primaryColor} 
+                                      secondaryColor={awayTeam.secondaryColor} 
+                                   />
                                </div>
                                <div className="font-bold text-lg">{awayTeam.nameEN}</div>
                                <div className="text-xs text-slate-400">Visiting</div>
@@ -186,8 +195,13 @@ const MatchView: React.FC<MatchViewProps> = ({ teams }) => {
                                <h2 className="text-3xl font-display font-bold text-white">{homeTeam.nameEN}</h2>
                                <p className="text-slate-400 text-sm font-bold uppercase tracking-wider">{homeTeam.coach}</p>
                            </div>
-                           <div className="w-20 h-20 rounded-full border-4 shadow-lg flex items-center justify-center text-3xl font-bold bg-slate-800" style={{ borderColor: homeTeam.primaryColor, color: homeTeam.primaryColor }}>
-                               {homeTeam.nameEN.charAt(0)}
+                           <div className="w-24 h-24 rounded-full border-4 shadow-lg flex items-center justify-center bg-slate-800 p-2" style={{ borderColor: homeTeam.primaryColor }}>
+                                <TeamLogo 
+                                    teamName={homeTeam.nameEN} 
+                                    primaryColor={homeTeam.primaryColor} 
+                                    secondaryColor={homeTeam.secondaryColor}
+                                    className="w-full h-full"
+                                />
                            </div>
                       </div>
 
@@ -206,8 +220,13 @@ const MatchView: React.FC<MatchViewProps> = ({ teams }) => {
 
                       {/* Away */}
                       <div className="flex items-center gap-6 flex-1 justify-start text-left">
-                           <div className="w-20 h-20 rounded-full border-4 shadow-lg flex items-center justify-center text-3xl font-bold bg-slate-800" style={{ borderColor: awayTeam.primaryColor, color: awayTeam.primaryColor }}>
-                               {awayTeam.nameEN.charAt(0)}
+                           <div className="w-24 h-24 rounded-full border-4 shadow-lg flex items-center justify-center bg-slate-800 p-2" style={{ borderColor: awayTeam.primaryColor }}>
+                                <TeamLogo 
+                                    teamName={awayTeam.nameEN} 
+                                    primaryColor={awayTeam.primaryColor} 
+                                    secondaryColor={awayTeam.secondaryColor}
+                                    className="w-full h-full"
+                                />
                            </div>
                            <div>
                                <h2 className="text-3xl font-display font-bold text-white">{awayTeam.nameEN}</h2>

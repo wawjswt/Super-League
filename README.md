@@ -122,5 +122,5 @@
 <p align="center">
   <i>"Football is not a matter of life and death. It's much more important than that."</i>
   <br />
-  <strong>Pantheon Football Association © 2024</strong>
+  <strong>Pantheon Football Association © 2025</strong>
 </p>

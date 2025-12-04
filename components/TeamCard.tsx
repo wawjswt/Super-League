@@ -1,6 +1,7 @@
 import React from 'react';
-import { Shield, User, MapPin, Swords } from 'lucide-react';
+import { User, MapPin, Swords } from 'lucide-react';
 import { TeamData } from '../types';
+import TeamLogo from './TeamLogo';
 
 interface TeamCardProps {
   team: TeamData;
@@ -40,8 +41,13 @@ const TeamCard: React.FC<TeamCardProps> = ({ team, onClick }) => {
               {team.nameCN}
             </p>
           </div>
-          <div className="p-2 rounded-full bg-slate-700/50">
-             <Shield className="w-5 h-5 text-slate-300" style={{ color: team.primaryColor }} />
+          <div className="p-2 rounded-full bg-slate-700/50 shadow-inner">
+             <TeamLogo 
+                teamName={team.nameEN} 
+                className="w-10 h-10" 
+                primaryColor={team.primaryColor} 
+                secondaryColor={team.secondaryColor} 
+             />
           </div>
         </div>
 

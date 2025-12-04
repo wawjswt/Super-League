@@ -4,6 +4,7 @@ import { TeamData } from '../types';
 import PitchVisualizer from './PitchVisualizer';
 import StatRadar from './StatRadar';
 import SquadList from './SquadList';
+import TeamLogo from './TeamLogo';
 
 interface ModalProps {
   team: TeamData | null;
@@ -59,6 +60,15 @@ const Modal: React.FC<ModalProps> = ({ team, onClose }) => {
                 ></div>
                 
                 <div className="relative z-10 flex flex-col items-center justify-center pointer-events-none">
+                    {/* Big Team Logo */}
+                    <div className="mb-6 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                        <TeamLogo 
+                            teamName={team.nameEN} 
+                            className="w-24 h-24 md:w-32 md:h-32" 
+                            primaryColor={team.primaryColor}
+                            secondaryColor={team.secondaryColor}
+                        />
+                    </div>
                     <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-2 uppercase tracking-wide drop-shadow-2xl px-4 leading-tight">{team.nameEN}</h2>
                     <p className="text-xl md:text-2xl text-yellow-500 font-display tracking-[0.2em] font-light">{team.nameCN}</p>
                 </div>

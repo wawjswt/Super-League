@@ -1,88 +1,126 @@
-# 🏆 Pantheon Super League Manager
+<h1 align="center">🏆 Pantheon Super League Manager</h1>
 
-> **Where Legends Collide.** A Generative AI-powered football universe.
+<p align="center">
+  <strong>Where Legends Collide.</strong> A Generative AI-powered football universe.
+</p>
 
-![Banner](./assets/logo.png)
+<div align="center">
+  <img src="./assets/banner.png" alt="Pantheon Banner" width="100%" style="border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);" />
+</div>
 
-## 🌟 Introduction
+<br />
 
-**Pantheon Super League Manager** is an immersive web application that brings football history to life. Powered by **Google Gemini 2.5 Flash**, it simulates a closed super league featuring 10 of the greatest tactical philosophies in history.
+<h2 align="center">🌟 Introduction</h2>
 
-Imagine a league where **Sir Alex Ferguson's** Class of '92 faces **Pep Guardiola's** Dream Team, or where **Mourinho's** Inter battles **Klopp's** Heavy Metal Liverpool. This app makes that happen.
+<p align="center">
+  <strong>Pantheon Super League Manager</strong> is an immersive web application that brings football history to life. Powered by <strong>Google Gemini 2.5 Flash</strong>, it simulates a closed super league featuring 10 of the greatest tactical philosophies in history.
+  <br /><br />
+  Imagine a league where <strong>Sir Alex Ferguson's</strong> Class of '92 faces <strong>Pep Guardiola's</strong> Dream Team, or where <strong>Mourinho's</strong> Inter battles <strong>Klopp's</strong> Heavy Metal Liverpool. This app makes that happen.
+</p>
 
----
+<hr />
 
-## 🚀 Key Features
+<h2>🚀 Key Features</h2>
 
-### 1. 🏟️ The Dashboard
-Explore the 10 legendary franchises. Each team card displays the manager, stadium, and unique tactical style.
-![Dashboard Screenshot](./assets/dashboard_preview.png)
+<table border="0" width="100%">
+  <tr>
+    <td width="45%" valign="middle">
+      <h3>1. 🏟️ The Dashboard</h3>
+      <p>Explore the 10 legendary franchises. Each team card displays the manager, stadium, and unique tactical style with a premium glassmorphism UI.</p>
+      <ul>
+        <li><strong>AI-Generated Lore:</strong> Backstories for every team.</li>
+        <li><strong>Real-time Stats:</strong> Radar charts for team attributes.</li>
+      </ul>
+    </td>
+    <td width="55%">
+      <img src="./assets/dashboard_preview.png" alt="Dashboard Preview" width="100%" style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);" />
+    </td>
+  </tr>
+</table>
 
-### 2. 📊 Deep Tactical Analysis
-Click on any team to open the **Command Center**:
-*   **Pitch Visualizer**: See the exact formation (e.g., 4-3-3 False 9, Catenaccio 5-3-2).
-*   **Radar Charts**: Analyze team attributes (Attack, Defense, Creativity, etc.).
-*   **Squad Roster**: Full list of legendary players (R9, Messi, Zidane, Maldini) with granular stats.
+<br />
 
-### 3. ⚔️ Match Engine
-Simulate historic clashes in real-time!
-*   **Live Commentary**: Watch the drama unfold minute-by-minute.
-*   **Dynamic Events**: Goals, yellow/red cards, and tactical shifts.
-*   **Post-Match Reports**: xG (Expected Goals), possession stats, and MVP awards.
+<table border="0" width="100%">
+  <tr>
+    <td width="55%">
+      <img src="./assets/match_preview.png" alt="Match Simulation" width="100%" style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);" />
+    </td>
+    <td width="45%" valign="middle">
+      <h3>2. ⚔️ Match Engine & Tactics</h3>
+      <p>Simulate historic clashes in real-time!</p>
+      <ul>
+        <li><strong>Pitch Visualizer:</strong> See exact formations (e.g., 4-3-3 False 9).</li>
+        <li><strong>Live Commentary:</strong> Watch the drama unfold minute-by-minute.</li>
+        <li><strong>Deep Stats:</strong> xG, possession, and player ratings.</li>
+        <li><strong>Visual Feedback:</strong> Dynamic scoreboards and event logs.</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
-![Match Simulation](./assets/match_preview.png)
+<table border="0" width="100%">
+  <tr>
+    <td width="100%" valign="top">
+      <h3>3. 📜 Pantheon Chronicles (Story Mode)</h3>
+      <p>
+        A rich, narrative-driven experience generated to immerse you in the drama. Read about <strong>locker room conflicts</strong>, <strong>secret meetings</strong>, and <strong>press conference wars</strong> between managers like Mourinho and Wenger.
+      </p>
+    </td>
+  </tr>
+</table>
 
-### 4. 📜 Pantheon Chronicles (Story Mode)
-A rich, narrative-driven experience generated to immerse you in the drama.
-*   Read about **locker room conflicts**, **secret meetings**, and **press conference wars**.
-*   Follow the season from the opening round to the "Secret Asado" in Miami.
+<hr />
 
----
+<h2>💾 The Data: "The Gods of Football"</h2>
 
-## 💾 The Data: "The Gods of Football"
+<p>The league consists of 10 fixed franchises, populated with specific legends:</p>
 
-The league consists of 10 fixed franchises, populated with specific legends:
+<div align="center">
 
-| Team Name | Manager | Philosophy | Key Stars |
-| :--- | :--- | :--- | :--- |
-| **The Crimson Dynasty** | Sir Alex Ferguson | Fergie Time | C. Ronaldo, Rooney, Beckham |
-| **Azure Control** | Pep Guardiola | Tiki-Taka | Cruyff, Henry, Iniesta |
-| **Obsidian Fortress** | José Mourinho | Park the Bus | Drogba, Maldini, Terry |
-| **White Galaxy** | Zinedine Zidane | Galacticos | R9, Mbappé, Modrić |
-| **Golden Sovereign** | Carlo Ancelotti | Laissez-faire | Maradona, Kaká, Shevchenko |
-| **Heavy Metal Storm** | Jürgen Klopp | Gegenpressing | Lewandowski, Gerrard, Salah |
-| **Orange Revolution** | Johan Cruyff | Total Football | Messi, Ronaldinho, Neeskens |
-| **The Iron Curtain** | Helenio Herrera | Catenaccio | Beckenbauer, Yashin, Suarez |
-| **Tactical Milan** | Arrigo Sacchi / Lippi | Zonal Pressing | Van Basten, Baggio, Baresi |
-| **Elegant Cannons** | Arsène Wenger | Wengerball | Pelé, Bergkamp, Vieira |
+| Team Name | Manager | Philosophy | Key Stars | Color Hex |
+| :--- | :--- | :--- | :--- | :--- |
+| **The Crimson Dynasty** | Sir Alex Ferguson | Fergie Time | C. Ronaldo, Rooney, Beckham | `#DA291C` |
+| **Azure Control** | Pep Guardiola | Tiki-Taka | Cruyff, Henry, Iniesta | `#6CABDD` |
+| **Obsidian Fortress** | José Mourinho | Park the Bus | Drogba, Maldini, Terry | `#034694` |
+| **White Galaxy** | Zinedine Zidane | Galacticos | R9, Mbappé, Modrić | `#FFFFFF` |
+| **Golden Sovereign** | Carlo Ancelotti | Laissez-faire | Maradona, Kaká, Shevchenko | `#FEBE10` |
+| **Heavy Metal Storm** | Jürgen Klopp | Gegenpressing | Lewandowski, Gerrard, Salah | `#C8102E` |
+| **Orange Revolution** | Johan Cruyff | Total Football | Messi, Ronaldinho, Neeskens | `#EDBB00` |
+| **The Iron Curtain** | Helenio Herrera | Catenaccio | Beckenbauer, Yashin, Suarez | `#002D72` |
+| **Tactical Milan** | Arrigo Sacchi / Lippi | Zonal Pressing | Van Basten, Baggio, Baresi | `#AC162C` |
+| **Elegant Cannons** | Arsène Wenger | Wengerball | Pelé, Bergkamp, Vieira | `#EF0107` |
 
----
+</div>
 
-## 🛠️ Tech Stack
+<hr />
 
-*   **Frontend**: React 19, TypeScript
-*   **Styling**: Tailwind CSS (Glassmorphism UI)
-*   **AI Engine**: [Google Gemini API](https://ai.google.dev/) (`gemini-2.5-flash`)
-*   **Icons**: Lucide React
-*   **Charts**: Recharts
+<h2>🛠️ Tech Stack</h2>
 
----
+<p align="center">
+  <img src="https://img.shields.io/badge/Frontend-React_19-blue?style=for-the-badge&logo=react" alt="React" />
+  <img src="https://img.shields.io/badge/Language-TypeScript-3178C6?style=for-the-badge&logo=typescript" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Styling-Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css" alt="Tailwind" />
+  <img src="https://img.shields.io/badge/AI-Gemini_2.5_Flash-8E75B2?style=for-the-badge&logo=google" alt="Gemini" />
+  <img src="https://img.shields.io/badge/Icons-Lucide_React-F7DF1E?style=for-the-badge" alt="Lucide" />
+  <img src="https://img.shields.io/badge/Charts-Recharts-FF6384?style=for-the-badge" alt="Recharts" />
+</p>
 
-## 🎨 Visuals & Style
+<hr />
 
-The app features a **"Dark Luxury"** aesthetic:
-*   Slate-950 backgrounds.
-*   Gold (#EAB308) accents for champions.
-*   Glassmorphism effects for modals and cards.
-*   Dynamic color themes based on team identity (e.g., Red for Crimson Dynasty, Sky Blue for Azure Control).
+<h2>🎨 Visuals & Style</h2>
 
----
+<p>The app features a <strong>"Dark Luxury"</strong> aesthetic designed to feel like a premium football broadcast:</p>
+<ul>
+  <li><strong>Background</strong>: Deep Slate (#020617) for high contrast.</li>
+  <li><strong>Accents</strong>: Gold (#EAB308) for champions and highlights.</li>
+  <li><strong>Effects</strong>: Glassmorphism for modals and cards (`backdrop-blur`).</li>
+  <li><strong>Typography</strong>: 'Teko' for headlines (sporty, condensed) and 'Inter' for UI text.</li>
+</ul>
 
-## 🏁 Getting Started
+<br />
 
-1.  Clone the repository.
-2.  Add your `API_KEY` to the environment.
-3.  Run `npm install` and `npm start`.
-4.  **Witness the history.**
-
-> *"Football is not a matter of life and death. It's much more important than that."*
+<p align="center">
+  <i>"Football is not a matter of life and death. It's much more important than that."</i>
+  <br />
+  <strong>Pantheon Football Association © 2024</strong>
+</p>

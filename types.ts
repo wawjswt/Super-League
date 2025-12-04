@@ -1,3 +1,4 @@
+
 export interface TeamStats {
   attack: number;
   defense: number;
@@ -22,6 +23,7 @@ export interface Player {
   role: string;
   ovr: number;
   attributes: PlayerAttributes;
+  isCaptain?: boolean;
 }
 
 export interface TeamData {
@@ -42,4 +44,46 @@ export interface TeamData {
 
 export interface LeagueResponse {
   teams: TeamData[];
+}
+
+// Match Simulation Types
+export type MatchEventType = 'goal' | 'card' | 'sub' | 'whistle' | 'chance';
+
+export interface MatchEvent {
+  id: number;
+  minute: number;
+  type: MatchEventType;
+  teamId?: string; // null if global event like whistle
+  player?: string; // Name of player involved
+  assist?: string; // Name of assisting player
+  description: string;
+  scoreAfter?: { home: number; away: number };
+}
+
+export interface MatchStats {
+  possession: number; // Percentage for home team
+  shotsHome: number;
+  shotsAway: number;
+  xgHome: number;
+  xgAway: number;
+}
+
+export interface MatchResult {
+  homeScore: number;
+  awayScore: number;
+  events: MatchEvent[];
+  stats: MatchStats;
+  mvp: {
+    player: string;
+    teamId: string;
+    rating: number;
+    description: string;
+  };
+  summary: string;
+}
+
+export interface MatchContext {
+  weather: string;
+  timeOfDay: string;
+  attendance: number;
 }

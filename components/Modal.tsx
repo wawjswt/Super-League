@@ -50,7 +50,13 @@ const Modal: React.FC<ModalProps> = ({ team, onClose }) => {
                         background: `linear-gradient(135deg, ${team.primaryColor} 0%, ${team.secondaryColor} 100%)` 
                     }}
                 />
-                <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '20px 20px' }}></div>
+                {/* Spotlight Effect */}
+                <div 
+                  className="absolute inset-0"
+                  style={{
+                    background: `radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.15) 0%, transparent 50%)`
+                  }}
+                ></div>
                 
                 <div className="relative z-10 flex flex-col items-center justify-center pointer-events-none">
                     <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-2 uppercase tracking-wide drop-shadow-2xl px-4 leading-tight">{team.nameEN}</h2>

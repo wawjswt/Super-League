@@ -1,6 +1,6 @@
 import React from 'react';
 import { Player } from '../types';
-import { User, Shield, Zap, Target, Brain, Footprints } from 'lucide-react';
+import { User, Shield, Zap, Target, Brain } from 'lucide-react';
 
 interface SquadListProps {
   squad: Player[];
@@ -8,18 +8,7 @@ interface SquadListProps {
   secondaryColor: string;
 }
 
-const SquadList: React.FC<SquadListProps> = ({ squad, primaryColor, secondaryColor }) => {
-  const starters = squad.filter(p => p.role === 'Starter');
-  const subs = squad.filter(p => p.role !== 'Starter');
-
-  const AttributeIcon = ({ attr, val }: { attr: string, val: number }) => {
-     let Icon = User;
-     if (attr === 'ATT') Icon = Target;
-     if (attr === 'DEF') Icon = Shield;
-     if (attr === 'SPD') Icon = Zap;
-     if (attr === 'CRE') Icon = Brain;
-     if (attr === 'DIS') Icon = Shield; // Reuse or find better
-
+const AttributeIcon = ({ attr, val }: { attr: string, val: number }) => {
      const getColor = (v: number) => {
          if (v >= 90) return 'text-yellow-400';
          if (v >= 80) return 'text-emerald-400';
@@ -31,20 +20,26 @@ const SquadList: React.FC<SquadListProps> = ({ squad, primaryColor, secondaryCol
             <div className={`text-[10px] font-bold ${getColor(val)}`}>{attr}</div>
             <div className="text-xs font-mono text-white">{val}</div>
             
-            {/* Tooltip */}
             <div className="absolute bottom-full mb-1 hidden group-hover:block bg-black/80 px-2 py-1 rounded text-[10px] text-white whitespace-nowrap z-10">
                 {attr}: {val}
             </div>
         </div>
      );
-  };
+};
 
-  const PlayerRow = ({ player }: { player: Player }) => (
+const PlayerRow = ({ player }: { player: Player }) => (
     <div className="grid grid-cols-12 gap-2 items-center p-3 hover:bg-white/5 rounded-lg transition-colors border-b border-white/5 last:border-0">
         <div className="col-span-1 text-slate-400 font-mono text-xs font-bold">{player.position}</div>
-        <div className="col-span-4 flex flex-col">
-            <span className="text-sm font-bold text-white">{player.name.split('(')[0]}</span>
-            <span className="text-xs text-slate-500">{player.name.match(/\((.*?)\)/)?.[1] || ''}</span>
+        <div className="col-span-4 flex items-center gap-2">
+            <div className="flex flex-col">
+                <span className="text-sm font-bold text-white">{player.name.split('(')[0]}</span>
+                <span className="text-xs text-slate-500">{player.name.match(/\((.*?)\)/)?.[1] || ''}</span>
+            </div>
+            {player.isCaptain && (
+                <div className="w-5 h-5 bg-yellow-500 text-black text-xs font-black rounded-full flex items-center justify-center shadow" title="Captain">
+                    C
+                </div>
+            )}
         </div>
         <div className="col-span-2 text-center">
             <div className={`
@@ -63,7 +58,11 @@ const SquadList: React.FC<SquadListProps> = ({ squad, primaryColor, secondaryCol
              <AttributeIcon attr="SPD" val={player.attributes.SPD} />
         </div>
     </div>
-  );
+);
+
+const SquadList: React.FC<SquadListProps> = ({ squad, primaryColor, secondaryColor }) => {
+  const starters = squad.filter(p => p.role === 'Starter');
+  const subs = squad.filter(p => p.role !== 'Starter');
 
   return (
     <div className="h-full flex flex-col space-y-6">

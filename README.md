@@ -2,7 +2,7 @@
 
 > **Where Legends Collide.** A Generative AI-powered football universe.
 
-![Banner](./assets/banner.png)
+![Banner](./assets/logo.png)
 
 ## 🌟 Introduction
 

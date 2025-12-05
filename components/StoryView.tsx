@@ -8,10 +8,12 @@ import { STORY_DATA_PART_4 } from '../data/story3';
 import { STORY_DATA_PART_5 } from '../data/story4';
 import { STORY_DATA_PART_6 } from '../data/story5';
 import { STORY_DATA_PART_7 } from '../data/story6';
+import { STORY_DATA_PART_8 } from '../data/story7';
+import { STORY_DATA_PART_9 } from '../data/story8';
 import PlayoffBracket from './PlayoffBracket';
 
 // Merge all story chapters
-const RAW_STORY_DATA = [...STORY_DATA, ...STORY_DATA_PART_2, ...STORY_DATA_PART_3, ...STORY_DATA_PART_4, ...STORY_DATA_PART_5, ...STORY_DATA_PART_6, ...STORY_DATA_PART_7];
+const RAW_STORY_DATA = [...STORY_DATA, ...STORY_DATA_PART_2, ...STORY_DATA_PART_3, ...STORY_DATA_PART_4, ...STORY_DATA_PART_5, ...STORY_DATA_PART_6, ...STORY_DATA_PART_7, ...STORY_DATA_PART_8, ...STORY_DATA_PART_9];
 
 interface StoryViewProps {
   activeChapterId: number;

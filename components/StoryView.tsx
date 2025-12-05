@@ -1,6 +1,6 @@
 
-import React, { useMemo } from 'react';
-import { Scroll, Mic2, ArrowRight, ArrowLeft } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { Scroll, Mic2, ArrowRight, ArrowLeft, Search } from 'lucide-react';
 import { STORY_DATA, StorySection, StoryTable } from '../data/story';
 import { STORY_DATA_PART_2 } from '../data/story1';
 import { STORY_DATA_PART_3 } from '../data/story2';
@@ -48,6 +48,8 @@ const StoryTableView: React.FC<{ table: StoryTable }> = ({ table }) => {
 };
 
 const StoryView: React.FC<StoryViewProps> = ({ activeChapterId, onChapterChange }) => {
+  const [jumpPage, setJumpPage] = useState('');
+
   // Ensure chapters are sorted by ID to guarantee correct flow
   const sortedChapters = useMemo(() => {
     return [...RAW_STORY_DATA].sort((a, b) => a.id - b.id);
@@ -61,23 +63,29 @@ const StoryView: React.FC<StoryViewProps> = ({ activeChapterId, onChapterChange 
   const safeCurrentIndex = currentIndex !== -1 ? currentIndex : 0;
 
   const handleNext = () => {
-    if (safeCurrentIndex < sortedChapters.length - 1) {
-        const nextChapterId = sortedChapters[safeCurrentIndex + 1].id;
-        onChapterChange(nextChapterId);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    const nextIndex = (safeCurrentIndex + 1) % sortedChapters.length;
+    const nextChapterId = sortedChapters[nextIndex].id;
+    onChapterChange(nextChapterId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handlePrev = () => {
-    if (safeCurrentIndex > 0) {
-        const prevChapterId = sortedChapters[safeCurrentIndex - 1].id;
-        onChapterChange(prevChapterId);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    // If index is 0, wrap around to length - 1
+    const prevIndex = (safeCurrentIndex - 1 + sortedChapters.length) % sortedChapters.length;
+    const prevChapterId = sortedChapters[prevIndex].id;
+    onChapterChange(prevChapterId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const isFirstChapter = safeCurrentIndex === 0;
-  const isLastChapter = safeCurrentIndex === sortedChapters.length - 1;
+  const handleJumpSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const pageNum = parseInt(jumpPage, 10);
+    if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= sortedChapters.length) {
+      onChapterChange(sortedChapters[pageNum - 1].id);
+      setJumpPage('');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 pb-20 animate-in fade-in duration-500">
@@ -91,29 +99,54 @@ const StoryView: React.FC<StoryViewProps> = ({ activeChapterId, onChapterChange 
           Pantheon Chronicles
         </h1>
         
-        <div className="flex items-center justify-center gap-6 mt-6">
-            <button 
-                onClick={handlePrev}
-                disabled={isFirstChapter}
-                className={`p-3 rounded-full border transition-all ${isFirstChapter ? 'border-slate-800 text-slate-800 opacity-50 cursor-not-allowed' : 'border-slate-700 text-slate-400 hover:border-yellow-500 hover:text-yellow-500'}`}
-            >
-                <ArrowLeft className="w-5 h-5" />
-            </button>
-            <div className="min-w-[280px]">
-                <p className="text-xl text-yellow-500 font-serif italic">
-                    {activeChapter.title}
-                </p>
-                <p className="text-xs text-slate-500 mt-1 uppercase tracking-widest">
-                    Page {safeCurrentIndex + 1} of {sortedChapters.length}
-                </p>
+        <div className="flex flex-col items-center justify-center gap-6 mt-6">
+            {/* Navigation Buttons */}
+            <div className="flex items-center gap-6">
+                <button 
+                    onClick={handlePrev}
+                    className="p-3 rounded-full border border-slate-700 text-slate-400 hover:border-yellow-500 hover:text-yellow-500 transition-all hover:scale-110 active:scale-95"
+                    title="Previous Chapter"
+                >
+                    <ArrowLeft className="w-5 h-5" />
+                </button>
+                <div className="min-w-[280px]">
+                    <p className="text-xl text-yellow-500 font-serif italic">
+                        {activeChapter.title}
+                    </p>
+                    <p className="text-xs text-slate-500 mt-1 uppercase tracking-widest">
+                        Page {safeCurrentIndex + 1} of {sortedChapters.length}
+                    </p>
+                </div>
+                <button 
+                    onClick={handleNext}
+                    className="p-3 rounded-full border border-slate-700 text-slate-400 hover:border-yellow-500 hover:text-yellow-500 transition-all hover:scale-110 active:scale-95"
+                    title="Next Chapter"
+                >
+                    <ArrowRight className="w-5 h-5" />
+                </button>
             </div>
-            <button 
-                onClick={handleNext}
-                disabled={isLastChapter}
-                className={`p-3 rounded-full border transition-all ${isLastChapter ? 'border-slate-800 text-slate-800 opacity-50 cursor-not-allowed' : 'border-slate-700 text-slate-400 hover:border-yellow-500 hover:text-yellow-500'}`}
-            >
-                <ArrowRight className="w-5 h-5" />
-            </button>
+
+            {/* Quick Jump Input */}
+            <form onSubmit={handleJumpSubmit} className="flex items-center gap-2">
+                <div className="relative">
+                    <input 
+                        type="number"
+                        min="1"
+                        max={sortedChapters.length}
+                        placeholder="Jump to page..."
+                        value={jumpPage}
+                        onChange={(e) => setJumpPage(e.target.value)}
+                        className="w-32 bg-slate-900 border border-slate-700 rounded-full px-4 py-1.5 text-xs text-center text-white focus:border-yellow-500 outline-none transition-colors"
+                    />
+                    <Search className="w-3 h-3 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
+                <button 
+                    type="submit"
+                    className="text-xs font-bold text-slate-400 hover:text-yellow-500 uppercase tracking-wider px-3 py-1.5 rounded-full border border-transparent hover:border-slate-700 transition-all"
+                >
+                    Go
+                </button>
+            </form>
         </div>
       </div>
 

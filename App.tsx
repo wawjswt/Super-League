@@ -173,7 +173,7 @@ const App: React.FC = () => {
                 
                 <div className="mt-16 border-t border-white/10 pt-8 text-center">
                     <p className="text-slate-500 text-sm">
-                        Powered by Gemini 2.5 Flash • Pantheon Football Association © {new Date().getFullYear()}
+                        Powered by Gemini • Pantheon Football Association © {new Date().getFullYear()}
                     </p>
                 </div>
               </>
